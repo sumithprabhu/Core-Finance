@@ -1,0 +1,12 @@
+{
+    "name": "EDU",
+    "symbol": "EDU",
+    "description": "EDU Token",
+    "image": "https://www.opencampus.xyz/static/media/coin-logo.39cbd6c42530e57817a5b98ac7621ca7.svg",
+    "attributes": [
+      {
+        "trait_type": "Item",
+        "value": "Utility"
+      }
+    ]
+  }
