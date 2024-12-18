@@ -94,7 +94,7 @@ export default function HeroSection() {
                 }}
               />
               <span className="text-md">
-                Blitz Protocol is Now Live on EDU Chain Testnet
+                Core Finance is Now Live on EDU Chain Testnet
               </span>
             </div>
 
