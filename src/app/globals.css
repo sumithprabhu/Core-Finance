@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-slideIn {
+  animation: slideIn 1s ease-in-out forwards;
+}
+
+#background-flow {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-color: #191715; /* Background color */
+}
+
+.flow-line {
+  position: absolute;
+  white-space: nowrap;
+  color: #39FF14; /* Neon green text color */
+  font-size: 16px; /* Slightly larger font size for readability */
+  opacity: 0.4; /* Lower opacity for background effect */
+  animation-timing-function: linear;
+  animation-iteration-count: infinite; /* Infinite looping */
+  width: auto; /* Set the width dynamically based on the content */
+  white-space: nowrap; /* Ensure the text doesn't wrap */
+}
+
+@keyframes moveLine {
+  0% {
+    transform: translateX(-100%); /* Start off-screen on the left */
+  }
+  100% {
+    transform: translateX(100vw); /* Move completely off-screen to the right */
+  }
+}
+
+@keyframes moveLineReverse {
+  0% {
+    transform: translateX(100vw); /* Start off-screen on the right */
+  }
+  100% {
+    transform: translateX(-100%); /* Move completely off-screen to the left */
+  }
+}
+
+
+
+.content-container {
+  background-color: rgba(0, 0, 0); /* Semi-transparent background */
+  border: 2px solid #39FF14; /* Neon green border */
+  border-radius: 15px; /* Rounded corners */
+  padding: 20px; /* Internal padding */
+  max-width: 1500px; /* Maximum width */
+  text-align: center; /* Center the text */
+  box-shadow: 0 0 15px rgba(57, 255, 20, 0.5); /* Soft glow effect */
+  z-index: 10; /* Ensure it is above the BackgroundFlow */
+}
+
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+
+/* For Webkit Browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 14px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a; /* Dark background for the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #000000; /* Black color for the scrollbar thumb */
+  border-radius: 6px; /* Rounded corners */
+  border: 2px solid #1a1a1a; /* Padding around the thumb */
+}
+
+/* For Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #000000 #1a1a1a;
+}
+
+
