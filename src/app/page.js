@@ -1,8 +1,7 @@
 "use client";
 import Header from "../components/Header"; // Assuming you have the Header component
 import Footer from "../components/Footer"; // Assuming you have the Footer component
-import Link from "next/link"; // For navigation
-import Image from "next/image"; // For images
+
 import animationData from "../../public/animation-home.json";
 import Lottie from "react-lottie-player";
 import animationDataLive from "../../public/animation-live.json";
