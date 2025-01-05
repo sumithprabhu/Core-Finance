@@ -130,7 +130,7 @@ export default function About() {
         <div className="bg-gray-800 p-8 rounded-lg shadow-lg text-center">
           <h2 className="text-4xl font-semibold mb-4">Why Core Finance?</h2>
           <p className="text-gray-400 text-lg">
-            Core Finance simplifies DeFi with secure cross-chain operations, high rewards, and intuitive tools. Whether you're a trader or liquidity provider, we deliver a unified platform for your financial goals.
+            Core Finance simplifies DeFi with secure cross-chain operations, high rewards, and intuitive tools. Whether youre a trader or liquidity provider, we deliver a unified platform for your financial goals.
           </p>
         </div>
 
@@ -214,7 +214,7 @@ export default function About() {
                 </span>
               </div>
               <p className="text-indigo-200/65">
-                Stake LP tokens to earn rewards and maximize returns. Grow your investments while supporting the protocol's liquidity ecosystem.
+                Stake LP tokens to earn rewards and maximize returns. Grow your investments while supporting the protocols liquidity ecosystem.
               </p>
             </div>
           </div>
