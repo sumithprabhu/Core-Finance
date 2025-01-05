@@ -87,7 +87,7 @@ export default function Dashboard() {
               transform: "scale(1.3)",
             }}
           ></div>
-<div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
+{/* <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
       <div className="bg-gray-900 w-[600px] h-[500px] rounded-lg shadow-lg text-white flex flex-col items-center justify-center relative">
         <h2 className="text-2xl font-bold mb-4 text-indigo-400">Website Down for Maintenance</h2>
         <p className="text-center text-gray-300 px-6 mb-6">
@@ -95,7 +95,7 @@ export default function Dashboard() {
         </p>
         
       </div>
-    </div>
+    </div> */}
           {/* Content */}
           <div className="relative z-10">
             {activeTab === "Bridge" && <Bridge />}
