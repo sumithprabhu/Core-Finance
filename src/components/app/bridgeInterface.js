@@ -10,8 +10,6 @@ import { useAccount, useSigner, useWalletClient, useWaitForTransactionReceipt,
   useWriteContract,useSignMessage} from "wagmi";
   import BridgePopup from "./popUp"; // Import the above component
 import sendTokens from "@/utils/transfer";
-import signMessageWithWallet from "@/utils/signer";
-import { sign } from "viem/accounts";
 
 
 export default function Bridge() {
