@@ -7,7 +7,7 @@ const facts = [
   "Did you know? Honey never spoils!",
   "The Eiffel Tower can be 15 cm taller during summer.",
   "Octopuses have three hearts.",
-  "Bananas are berries, but strawberries aren't!",
+  "Bananas are berries, but strawberries arent!",
   "A day on Venus is longer than a year on Venus.",
   "Humans share 60% of their DNA with bananas."
 ];

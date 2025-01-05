@@ -96,7 +96,7 @@ export default function Workflows() {
                   </div>
                   <p className="text-indigo-200/65">
                     Stake LP tokens to earn rewards and maximize returns. Grow
-                    your investments while supporting the protocol's liquidity
+                    your investments while supporting the protocols liquidity
                     ecosystem.
                   </p>
                 </div>
