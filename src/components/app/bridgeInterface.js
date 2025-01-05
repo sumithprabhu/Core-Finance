@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Image from "next/image";
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,12 +14,21 @@ export default function Bridge() {
   const [fromChain, setFromChain] = useState("Ethereum");
   const [toChain, setToChain] = useState("Ethereum");
   const [toToken, setToToken] = useState("USDC");
+  const [btnText,setBtnText]=useState("Bridge");
+  const [router, setRouter] = useState("-");
+  const [slippage, setSlippage] = useState("-");
 
   const [fromTokenisOpen, setFromTokenIsOpen] = useState(false);
   const [fromChainisOpen, setFromChainIsOpen] = useState(false);
   const [toTokenisOpen, setToTokenIsOpen] = useState(false);
   const [toChainisOpen, setToChainIsOpen] = useState(false);
   const [isConnected, setIsConnected] = useState(true); // Toggle state
+
+  useEffect(() => {
+    // This function runs every time `swapAmount` changes
+    setRouter("Core");
+    setSlippage("0.04%");
+  }, [swapAmount]); 
 
   const tokens = [
     { name: "USDC", logo: "/usdc.svg" },
@@ -342,19 +351,23 @@ export default function Bridge() {
 
           {/* Router and Slippage */}
           <div className="border border-gray-700 rounded-md bg-gray-800 p-4 text-gray-300">
-            <div className="flex justify-between items-center mb-2">
+            <div className="flex justify-between items-center ">
               <span className="text-sm">Router</span>
-              <span className="text-gray-400">-</span>
+              <span className="text-gray-400">{router}</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="text-sm">Slippage</span>
-              <span className="text-gray-400">-</span>
+              <span className="text-gray-400">{slippage}</span>
+            </div>
+            <div className="flex justify-between items-center">
+              <span className="text-sm">Fees</span>
+              <span className="text-gray-400">0.02%</span>
             </div>
           </div>
 
           {/* Full-width Button */}
           <div className="mt-4">
-            <button className="w-full bg-gray-700 text-gray-200 py-3 rounded-md hover:bg-gray-600 transition">
+            <button className="w-full bg-indigo-700 text-gray-200 py-3 rounded-md hover:bg-indigo-900 transition">
               Bridge {fromToken}
             </button>
           </div>

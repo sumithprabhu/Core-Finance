@@ -1,8 +1,66 @@
 const contract_ABI=[
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_initialOwner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_usdc",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_usdt",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_dai",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_edu",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_cUsd",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "_cEdu",
+				"type": "address"
+			}
+		],
 		"stateMutability": "nonpayable",
 		"type": "constructor"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			}
+		],
+		"name": "OwnableInvalidOwner",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "account",
+				"type": "address"
+			}
+		],
+		"name": "OwnableUnauthorizedAccount",
+		"type": "error"
 	},
 	{
 		"anonymous": false,
@@ -10,35 +68,23 @@ const contract_ABI=[
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "creator",
+				"name": "user",
 				"type": "address"
 			},
 			{
 				"indexed": false,
 				"internalType": "string",
-				"name": "protocolName",
+				"name": "poolType",
 				"type": "string"
 			},
 			{
 				"indexed": false,
 				"internalType": "uint256",
-				"name": "timestamp",
+				"name": "amount",
 				"type": "uint256"
-			},
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "protocolContractAddress",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "string",
-				"name": "_id",
-				"type": "string"
 			}
 		],
-		"name": "BlitzCreated",
+		"name": "LiquidityAdded",
 		"type": "event"
 	},
 	{
@@ -47,17 +93,23 @@ const contract_ABI=[
 			{
 				"indexed": true,
 				"internalType": "address",
-				"name": "creator",
+				"name": "user",
 				"type": "address"
 			},
 			{
 				"indexed": false,
 				"internalType": "string",
-				"name": "protocolName",
+				"name": "poolType",
 				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
 			}
 		],
-		"name": "BlitzDeactivated",
+		"name": "LiquidityRemoved",
 		"type": "event"
 	},
 	{
@@ -80,101 +132,98 @@ const contract_ABI=[
 		"type": "event"
 	},
 	{
-		"inputs": [],
-		"name": "blitzCreationFee",
-		"outputs": [
+		"anonymous": false,
+		"inputs": [
 			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "toToken",
+				"type": "string"
+			},
+			{
+				"indexed": false,
 				"internalType": "uint256",
-				"name": "",
+				"name": "amount",
 				"type": "uint256"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
+		"name": "SwapCompleted",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "fromToken",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "toToken",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "destinationChain",
+				"type": "string"
+			}
+		],
+		"name": "SwapInitiated",
+		"type": "event"
 	},
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"name": "blitzes",
-		"outputs": [
-			{
 				"internalType": "string",
-				"name": "protocolName",
+				"name": "poolType",
 				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
 			},
 			{
 				"internalType": "uint256",
-				"name": "timestamp",
+				"name": "amount",
 				"type": "uint256"
-			},
-			{
-				"internalType": "bool",
-				"name": "isActive",
-				"type": "bool"
-			},
-			{
-				"internalType": "address",
-				"name": "protocolContractAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_id",
-				"type": "string"
 			}
 		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "protocolName",
-				"type": "string"
-			},
-			{
-				"internalType": "address",
-				"name": "protocolContractAddress",
-				"type": "address"
-			},
-			{
-				"internalType": "string",
-				"name": "_id",
-				"type": "string"
-			}
-		],
-		"name": "createBlitz",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "deactivateBlitz",
+		"name": "addLiquidity",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			}
-		],
-		"name": "getBlitz",
+		"inputs": [],
+		"name": "cEdu",
 		"outputs": [
 			{
-				"internalType": "string",
-				"name": "_id",
-				"type": "string"
+				"internalType": "contract cEDU",
+				"name": "",
+				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -182,7 +231,84 @@ const contract_ABI=[
 	},
 	{
 		"inputs": [],
-		"name": "getBlitzCreationFee",
+		"name": "cUsd",
+		"outputs": [
+			{
+				"internalType": "contract cUSD",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "dai",
+		"outputs": [
+			{
+				"internalType": "contract IERC20",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "edu",
+		"outputs": [
+			{
+				"internalType": "contract IERC20",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getAllTokenBalances",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "usdcBalance",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "usdtBalance",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "daiBalance",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "cUsdBalance",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "cEduBalance",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "eduBalance",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getCEduBalance",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -195,20 +321,7 @@ const contract_ABI=[
 	},
 	{
 		"inputs": [],
-		"name": "getOwner",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "getTotalBlitzCount",
+		"name": "getCUsdBalance",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -223,16 +336,16 @@ const contract_ABI=[
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "user",
+				"name": "token",
 				"type": "address"
 			}
 		],
-		"name": "hasBlitz",
+		"name": "getPoolBalance",
 		"outputs": [
 			{
-				"internalType": "bool",
+				"internalType": "uint256",
 				"name": "",
-				"type": "bool"
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -243,7 +356,7 @@ const contract_ABI=[
 		"name": "owner",
 		"outputs": [
 			{
-				"internalType": "address payable",
+				"internalType": "address",
 				"name": "",
 				"type": "address"
 			}
@@ -254,33 +367,83 @@ const contract_ABI=[
 	{
 		"inputs": [
 			{
+				"internalType": "address",
+				"name": "toToken",
+				"type": "address"
+			},
+			{
 				"internalType": "uint256",
-				"name": "newFee",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			}
+		],
+		"name": "receiveSwap",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "poolType",
+				"type": "string"
+			},
+			{
+				"internalType": "address",
+				"name": "token",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
 				"type": "uint256"
 			}
 		],
-		"name": "setBlitzCreationFee",
+		"name": "removeLiquidity",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "totalBlitzCount",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
+		"name": "renounceOwnership",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [
 			{
-				"internalType": "address payable",
+				"internalType": "address",
+				"name": "fromToken",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "amount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "destinationChain",
+				"type": "string"
+			}
+		],
+		"name": "swap",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
 				"name": "newOwner",
 				"type": "address"
 			}
@@ -288,6 +451,32 @@ const contract_ABI=[
 		"name": "transferOwnership",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "usdc",
+		"outputs": [
+			{
+				"internalType": "contract IERC20",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "usdt",
+		"outputs": [
+			{
+				"internalType": "contract IERC20",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	}
 ]

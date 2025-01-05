@@ -5,6 +5,7 @@ import {
   RainbowKitProvider,lightTheme
 } from '@rainbow-me/rainbowkit';
 import { WagmiProvider ,http} from 'wagmi';
+import {sepolia} from 'wagmi/chains';
 
 import {
   QueryClientProvider,
@@ -33,7 +34,7 @@ const OpenCampus = {
 const config = getDefaultConfig({
     appName: "Blitz",
     projectId: "d9a0a754111f41404d4e99cb91f32b3d",
-  chains: [OpenCampus],
+  chains: [OpenCampus,sepolia],
   transports: {
     [OpenCampus.id]: http('https://rpc.open-campus-codex.gelato.digital/')
   }
@@ -49,7 +50,7 @@ const Providers = ({ children }) => {
       <QueryClientProvider client={queryClient}>
       <RainbowKitProvider
         theme={lightTheme({
-          accentColor: "#FF8B00",
+          accentColor: "#4352d1",
           accentColorForeground: "white",
           borderRadius: "medium",
           fontStack: "system",

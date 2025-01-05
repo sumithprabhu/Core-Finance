@@ -8,63 +8,81 @@ export default function IncentivizedPools() {
   const pools = [
     {
       id: 1,
-      blockchain: "Blast",
+      blockchain: "Ethereum",
       type: "Stablecoin Pool",
-      logo: "/images/blast.svg",
+      logo: "/images/ethereum.svg",
       token: "nUSDLP",
       value: "$249,574",
       unit: "USD",
       apy: "8%",
+      tokens: ["/images/usdc.svg", "/images/usdt.svg", "/images/dai.svg"],
+      tokenName: ["USDC", "DAI", "USDT"] // Added token array
+      // Added token array
     },
     {
       id: 2,
-      blockchain: "Blast",
+      blockchain: "Ethereum",
       type: "EDU Pool",
-      logo: "/images/blast.svg",
+      logo: "/images/ethereum.svg",
       token: "nETH-LP",
       value: "$2,383,254.7",
       unit: "ETH",
       apy: "3%",
+      tokens: ["/images/usdc.svg", "/images/usdt.svg", "/images/dai.svg"],
+      tokenName: ["USDC", "DAI", "USDT"] // Added token array
+      // Added token array
     },
     {
       id: 3,
-      blockchain: "Optimism",
+      blockchain: "EDU Chain",
       type: "Stablecoin Pool",
-      logo: "/images/optimism.svg",
+      logo: "/images/edu.svg",
       token: "nUSDLP",
       value: "$524,050",
       unit: "USD",
       apy: "8%",
+      tokens: ["/images/usdc.svg", "/images/usdt.svg", "/images/dai.svg"], 
+      tokenName: ["USDC", "DAI", "USDT"] // Added token array
+      // Added token array
     },
     {
       id: 4,
-      blockchain: "Optimism",
+      blockchain: "EDU Chain",
       type: "EDU Pool",
-      logo: "/images/optimism.svg",
+      logo: "/images/edu.svg",
       token: "nETH-LP",
       value: "$2,033,180.7",
       unit: "ETH",
       apy: "1%",
+      tokens: ["/images/usdc.svg", "/images/usdt.svg", "/images/dai.svg"], 
+      tokenName: ["USDC", "DAI", "USDT"] // Added token array
+      // Added token array
     },
     {
       id: 5,
-      blockchain: "Ethereum",
+      blockchain: "Arbitrum",
       type: "Stablecoin Pool",
-      logo: "/images/ethereum.svg",
+      logo: "/images/arbitrum.svg",
       token: "nUSDLP",
       value: "$1,500,000",
       unit: "USD",
       apy: "5%",
+      tokens: ["/images/usdc.svg", "/images/usdt.svg", "/images/dai.svg"], 
+      tokenName: ["USDC", "DAI", "USDT"] // Added token array
+      // Added token array
     },
     {
       id: 6,
-      blockchain: "Ethereum",
+      blockchain: "Arbitrum",
       type: "EDU Pool",
-      logo: "/images/ethereum.svg",
+      logo: "/images/arbitrum.svg",
       token: "nETH-LP",
       value: "$3,000,000",
       unit: "ETH",
       apy: "2%",
+      tokens: ["/images/usdc.svg", "/images/usdt.svg", "/images/dai.svg"], // Added token array
+      tokenName: ["USDC", "DAI", "USDT"] // Added token array
+
     },
     {
       id: 7,
@@ -75,6 +93,9 @@ export default function IncentivizedPools() {
       value: "$600,000",
       unit: "USD",
       apy: "6%",
+      tokens: ["/images/usdc.svg", "/images/usdt.svg", "/images/dai.svg"], // Added token array
+      tokenName: ["USDC", "DAI", "USDT"] // Added token array
+
     },
     {
       id: 8,
@@ -85,16 +106,18 @@ export default function IncentivizedPools() {
       value: "$1,200,000",
       unit: "ETH",
       apy: "4%",
+      tokens: ["/images/usdc.svg", "/images/usdt.svg", "/images/dai.svg"],
+      tokenName: ["USDC", "DAI", "USDT"] // Added token array
     },
   ];
 
-  const handleCardClick = (poolName) => {
-    setSelectedPool(poolName);
+  const handleCardClick = (pool) => {
+    setSelectedPool(pool);
     setIsModalOpen(true); // Open Modal
   };
 
   return (
-    <div className="p-6 bg-gray-900 text-white">
+    <div className="p-6  text-white">
       <h1 className="text-3xl font-bold mb-2">Incentivized Pools</h1>
       <p className="text-gray-400 mb-6">
         Contributors are rewarded for balancing asset pools.
@@ -105,7 +128,7 @@ export default function IncentivizedPools() {
         {pools.map((pool) => (
           <div
             key={pool.id}
-            onClick={() => handleCardClick(pool.token)}
+            onClick={() => handleCardClick(pool)}
             className="p-4 bg-gray-800 rounded-lg shadow-md hover:bg-gray-700 cursor-pointer flex justify-between items-center"
           >
             <div className="flex items-center gap-4">
@@ -115,10 +138,50 @@ export default function IncentivizedPools() {
                   {pool.blockchain}
                   <span className="text-gray-400 text-sm">{pool.token}</span>
                 </h3>
-                <p className="text-gray-400 text-sm">{pool.type}</p>
+                <div className="flex ">
+                  <p className="text-gray-400 text-sm">{pool.type}</p>
+                  {pool.tokens.length > 0 && (
+                    <div className="flex items-center ml-4 gap-2">
+                      {pool.tokens.map((tokenIcon, index) => (
+                        <img
+                          key={index}
+                          src={tokenIcon}
+                          alt={`Token ${index}`}
+                          className="w-5 h-5 rounded-full -ml-2"
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
-            <div className="text-indigo-400 font-bold text-xl">{pool.apy} APY</div>
+
+            <div className="flex flex-col gap-2">
+              <div className="text-indigo-400 font-bold text-2xl">
+                {pool.value} 
+              </div>
+              <div className="flex justify-end items-center">
+                <div className="text-indigo-400 font-bold text-md mr-2">
+                  {pool.apy} APY
+                </div>
+                <div className="text-gray-400 hover:text-white cursor-pointer mt-1">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-4 w-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -127,7 +190,7 @@ export default function IncentivizedPools() {
       <OpenedPool
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        poolName={selectedPool}
+        pool={selectedPool}
       />
     </div>
   );
