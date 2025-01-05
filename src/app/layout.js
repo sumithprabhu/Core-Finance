@@ -8,8 +8,8 @@ import { Toaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Blitz Protocol",
-  description: "The Future of Blockchain Data",
+  title: "Core Finance",
+  description: "The Future of Decentralised Finance",
 };
 
 export default function RootLayout({ children }) {

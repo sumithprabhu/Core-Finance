@@ -58,7 +58,6 @@ export default function HeroSection() {
         "Core Finance is available on Ethereum, Arbitrum, Binance Smart Chain, Solana, and EDU Chain. Liquidity pools and swap functionalities work across all supported blockchains.",
     },
   ];
-  
 
   return (
     <div className=" text-white min-h-screen">
@@ -222,14 +221,14 @@ export default function HeroSection() {
         {/* Text and button */}
         <div className="relative z-20 text-center text-white mt-[-17rem]">
           <h2 className="text-4xl font-bold mb-4">
-            Empower your dApp with seamless integration.
+            Simplify Cross-Chain Liquidity and Swaps.
           </h2>
           <p className="text-lg mb-6">
-            Unlock the full potential of dApps with Blitz Protocol, enabling
-            smooth and efficient data access.
+            Core Finance bridges the gap across blockchains, offering seamless
+            token swaps and liquidity management.
           </p>
           <button className="bg-gradient-to-t from-indigo-600 to-indigo-500 text-white font-bold py-3 px-8 rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-110">
-            Start Building
+            Explore dApp
           </button>
         </div>
       </section>

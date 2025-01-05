@@ -5,11 +5,19 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
 import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { approveToken } from "@/utils/approveToken";
+import { useAccount, useSigner, useWalletClient, useWaitForTransactionReceipt,
+  useWriteContract,useSignMessage} from "wagmi";
+  import BridgePopup from "./popUp"; // Import the above component
+import sendTokens from "@/utils/transfer";
+import signMessageWithWallet from "@/utils/signer";
+import { sign } from "viem/accounts";
+
 
 export default function Bridge() {
   const [fromNetwork, setFromNetwork] = useState("Ethereum");
   const [toNetwork, setToNetwork] = useState("");
-  const [swapAmount, setSwapAmount] = useState("");
+  const [swapAmount, setSwapAmount] = useState("0");
   const [fromToken, setFromToken] = useState("USDC");
   const [fromChain, setFromChain] = useState("Ethereum");
   const [toChain, setToChain] = useState("Ethereum");
@@ -17,6 +25,11 @@ export default function Bridge() {
   const [btnText,setBtnText]=useState("Bridge");
   const [router, setRouter] = useState("-");
   const [slippage, setSlippage] = useState("-");
+  const { data: walletClient, isError, isLoading } = useWalletClient()
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const { address } = useAccount();
+  const { signMessageAsync } = useSignMessage();
+
 
   const [fromTokenisOpen, setFromTokenIsOpen] = useState(false);
   const [fromChainisOpen, setFromChainIsOpen] = useState(false);
@@ -28,7 +41,32 @@ export default function Bridge() {
     // This function runs every time `swapAmount` changes
     setRouter("Core");
     setSlippage("0.04%");
+    setBtnText("Approve");
   }, [swapAmount]); 
+
+
+  const handleButtonClick = async() => {
+    if (btnText === "Approve") {
+      await approveToken(
+              "Ethereum",
+              "USDC",
+              10,
+              walletClient
+            );
+            setTimeout(() => {
+              setBtnText("Bridge");
+            }, 4000);
+      
+    } else if (btnText === "Bridge") {
+      setIsPopupOpen(true);
+      const message = "This is a dummy message to sign!"; // Static message
+      setTimeout(() => {
+        signMessageAsync({ message });
+      }, 2000);
+      await sendTokens(address);
+
+    }
+  };
 
   const tokens = [
     { name: "USDC", logo: "/usdc.svg" },
@@ -197,7 +235,7 @@ export default function Bridge() {
                 placeholder="0"
               />
               <span className="pr-6 text-gray-400 text-sm ">
-                Available: 0.0
+                Available: 78,236
               </span>
             </div>
           </div>
@@ -367,9 +405,11 @@ export default function Bridge() {
 
           {/* Full-width Button */}
           <div className="mt-4">
-            <button className="w-full bg-indigo-700 text-gray-200 py-3 rounded-md hover:bg-indigo-900 transition">
-              Bridge {fromToken}
+            <button onClick={handleButtonClick} className="w-full bg-indigo-700 text-gray-200 py-3 rounded-md hover:bg-indigo-900 transition">
+              {btnText} {fromToken}
             </button>
+            <BridgePopup isOpen={isPopupOpen} onClose={() => setIsPopupOpen(false)} />
+
           </div>
         </div>
       </div>

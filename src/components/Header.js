@@ -87,68 +87,15 @@ export default function Header() {
           {" "}
           {/* Added spacing */}
           {/* Products Dropdown */}
-          <div
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-            className="relative"
-          >
-            <button className="text-white text-lg flex items-center font-semibold">
-              Products <FaChevronDown className="ml-2" />
-            </button>
-            {isDropdownOpen && (
-              <div
-                className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 w-96 bg-[#202124] text-white shadow-lg border border-[#C0C0C0] border-opacity-50 rounded-3xl p-6" // Gray background and spacious, rounded corners
-                onMouseEnter={handleDropdownEnter}
-                onMouseLeave={handleDropdownLeave}
-              >
-                <ul className="space-y-6">
-                  <Link href="/explore" legacyBehavior>
-                    <li className="flex items-start hover:bg-[#313338] rounded-lg p-3 transition-all cursor-pointer group">
-                      {" "}
-                      {/* Group added */}
-                      <div className="flex-grow">
-                        <a className="text-white font-semibold group-hover:text-[#FF8B00]">
-                          Blitz Explorer
-                        </a>
-                        <p className="text-gray-400 text-sm">
-                          Explore blockchain with Blitz Protocol.
-                        </p>
-                      </div>
-                    </li>
-                  </Link>
-
-                  <Link href="/playground" legacyBehavior>
-                    <li className="flex items-start hover:bg-[#313338] rounded-lg p-3 transition-all cursor-pointer group">
-                      {" "}
-                      {/* Group added */}
-                      <div className="flex-grow">
-                        <a className="text-white font-semibold group-hover:text-[#FF8B00]">
-                          Playground
-                        </a>
-                        <p className="text-gray-400 text-sm">
-                          Interact and build with Blitz Protocol.
-                        </p>
-                      </div>
-                    </li>
-                  </Link>
-                </ul>
-              </div>
-            )}
-          </div>
-          {/* Docs link */}
-          <div>
-            <Link href="/docs" legacyBehavior>
-              <a className="text-white text-lg font-semibold">Docs</a>
-            </Link>
-          </div>
+         
           {/* Launch Playground or Connect Wallet */}
           {isRootPage ? (
             <a
-              href="/playground"
+              href="/app"
               className="text-lg inline-block text-white font-semibold px-6 py-2 rounded-lg bg-gradient-to-t from-indigo-600 to-indigo-500 py-[5px] text-white hover:bg-indigo-700 transition-all duration-300"
               style={{ maxWidth: "250px" }}
             >
-              Launch Playground
+              Launch Dapp
             </a>
           ) : (
             <ConnectButton

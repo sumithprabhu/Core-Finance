@@ -111,7 +111,7 @@ const Footer = () => {
       </div>
       {/* Footer Bottom */}
       <div className="mt-[3rem] border-t border-gray-700 pt-6 flex justify-between items-center text-sm text-gray-500">
-        <p>© 2024 Blitz Protocol. All rights reserved.</p>
+        <p>© 2024 Core Finanace. All rights reserved.</p>
         <div className="flex space-x-4">
           <a href="/privacy-policy" className="hover:text-white">
             Privacy Policy
